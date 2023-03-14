@@ -1,9 +1,18 @@
 import {initializeBlock} from '@airtable/blocks/ui';
-import React from 'react';
+import React, {useState} from 'react';
 
-function HelloWorldApp() {
-    // YOUR CODE GOES HERE
-    return <div>Hello world 🚀</div>;
+function ConstructionTest() {
+    const [searchTerm, setSearchTerm] = useState()
+
+    function updateSearchTerm(event) {
+        setSearchTerm(event.target.value)
+    }
+
+    return <div>
+        <input onChange={updateSearchTerm} />
+        <WidgetsList searchTerm={searchTerm} />
+
+    </div>;
 }
 
-initializeBlock(() => <HelloWorldApp />);
+initializeBlock(() => <ConstructionTest />);
