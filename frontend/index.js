@@ -1,5 +1,6 @@
 import {initializeBlock} from '@airtable/blocks/ui';
 import React, {useState} from 'react';
+import ConstructionList from './ConstructionList'
 
 function ConstructionTest() {
     const [searchTerm, setSearchTerm] = useState()
@@ -10,7 +11,7 @@ function ConstructionTest() {
 
     return <div>
         <input onChange={updateSearchTerm} />
-        <WidgetsList searchTerm={searchTerm} />
+        <ConstructionList searchTerm={searchTerm} />
 
     </div>;
 }

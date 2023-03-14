@@ -9,7 +9,7 @@ export default function ConstructionList(props) {
     const records = useRecords(table)
 
     return <div>
-        <div>{records[0].getCellValue("Name")}</div>
+        <div>{records[0].getCellValue("Materials")}</div>
         <div>{records.length}</div>
         <div>Term: {searchTerm}</div>
     </div>
