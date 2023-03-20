@@ -2,7 +2,7 @@ import React from "react"
 
 export default function Box() {
     return (
-        <Box
+        <div
         style={{
             backgroundColor: '#333',
             borderRadius: 4,
@@ -13,6 +13,6 @@ export default function Box() {
         }}
         >
         john
-        </Box>
+        </div>
     )
     }
