@@ -12,7 +12,7 @@ export default function Box() {
             width: 300,
         }}
         >
-        john
+        test
         </div>
     )
     }
