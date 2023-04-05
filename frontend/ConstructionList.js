@@ -6,24 +6,19 @@ export default function ConstructionList(props) {
 
     const base = useBase()
     const table = base.getTable("Materials")
-    const records = useRecords(table)
-    
-    
+    const records = useRecords(table, { fields: ["Materials", "price"] })
 
-    return <div>
-        <div></div>
-        <div>{searchTable(records, 'wood')}</div>
-        <div>{records[0].getCellValue("Materials")}: ${records[0].getCellValue("price")}</div>
-        <div>{records.length} </div>
-        <div>Term: {searchTerm}</div>
-    </div>
-}
+    const filteredRecords = records.filter(record =>
+      record.getCellValueAsString("Materials").toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
-function searchTable(table, term){
-    for (let i = 0; i < table.length; i++){
-        if (table[i].getCellValue('Materials')==term.toString()){
-            return i
-        }
-    }
-    return 'NA'
+    return (
+        <div>
+            {filteredRecords.map(record => (
+                <div key={record.id}>
+                    {record.getCellValueAsString("Materials")}: ${record.getCellValueAsString("price")}
+                </div>
+            ))}
+        </div>
+    );
 }

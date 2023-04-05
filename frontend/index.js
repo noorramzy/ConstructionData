@@ -1,22 +1,23 @@
-import {initializeBlock} from '@airtable/blocks/ui';
-import React, {useState} from 'react';
-import ConstructionList from './ConstructionList'
-import Box from './Floorplan.js'
+import { initializeBlock } from '@airtable/blocks/ui';
+import React, { useState } from 'react';
+import ConstructionList from './ConstructionList';
+import Box from './Floorplan';
 
 function ConstructionTest() {
-    const [searchTerm, setSearchTerm] = useState()
+    const [searchTerm, setSearchTerm] = useState('');
+    const [showList, setShowList] = useState(true);
 
     function updateSearchTerm(event) {
-        setSearchTerm(event.target.value)
+        setSearchTerm(event.target.value);
     }
 
-    return <div>
-        
-        <input onChange={updateSearchTerm} />
-        <ConstructionList searchTerm={searchTerm} />
-        <Box></Box>
-
-    </div>;
+    return (
+        <div>
+            <input id="term" value={searchTerm} onChange={updateSearchTerm} />
+            <ConstructionList searchTerm={searchTerm} />
+            <Box />
+        </div>
+    );
 }
 
 initializeBlock(() => <ConstructionTest />);
