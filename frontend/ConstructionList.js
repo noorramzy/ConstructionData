@@ -5,18 +5,18 @@ export default function ConstructionList(props) {
     const searchTerm = props.searchTerm
 
     const base = useBase()
-    const table = base.getTable("Materials")
-    const records = useRecords(table, { fields: ["Materials", "price"] })
+    const table = base.getTable(props.location)
+    const records = useRecords(table, { fields: ["Material", "Price"] })
 
     const filteredRecords = records.filter(record =>
-      record.getCellValueAsString("Materials").toLowerCase().includes(searchTerm.toLowerCase())
+      record.getCellValueAsString("Material").toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return (
         <div>
             {filteredRecords.map(record => (
                 <div key={record.id}>
-                    {record.getCellValueAsString("Materials")}: ${record.getCellValueAsString("price")}
+                    {record.getCellValueAsString("Material")}: ${record.getCellValueAsString("Price")}
                 </div>
             ))}
         </div>
