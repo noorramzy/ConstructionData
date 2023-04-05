@@ -13,6 +13,13 @@ function ConstructionTest() {
 
     return (
         <div>
+            <div>
+                <select>
+                <option>DC</option>
+                <option>MD</option>
+                <option>VA</option>
+                </select>
+            </div>
             <input id="term" value={searchTerm} onChange={updateSearchTerm} />
             <ConstructionList searchTerm={searchTerm} />
             <Box />
