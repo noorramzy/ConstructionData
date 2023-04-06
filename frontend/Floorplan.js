@@ -11,7 +11,7 @@ export default function Box() {
             padding: 12,
             width:500,
             position: "absolute",
-            top: 150,
+            top: 800,
             left: 0,
         }}
         >
