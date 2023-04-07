@@ -1,5 +1,6 @@
 import { initializeBlock } from '@airtable/blocks/ui';
 import React, { useState } from 'react';
+import { Routes, Route, NavLink } from 'react-router-dom';
 import ConstructionList from './ConstructionList';
 import Box from './Floorplan';
 import "./index.css";
@@ -18,6 +19,17 @@ const ConstructionTest = () => {
 
   return (
     <div>
+      {/* <div className="bar">
+        <div>
+          <NavLink>Test 1</NavLink>
+          <NavLink>Test 2</NavLink>
+          <NavLink>Test 3</NavLink>
+        </div>
+        <Routes>
+          <Route path="/" element={}></Route>
+        </Routes>
+      </div> */}
+
       <div className="dropdown">
         <label htmlFor="location">Location:</label>
         <select id="location" value={location} onChange={handleLocationChange}>
