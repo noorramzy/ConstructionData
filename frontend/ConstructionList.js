@@ -24,8 +24,9 @@ export default function ConstructionList(props) {
               {record.getCellValueAsString('Material')}:
             </span>
             <span className="construction-list-item-price">
-              ${record.getCellValueAsString('Price')}
+              ${Number(record.getCellValueAsString('Price')).toLocaleString()}
             </span>
+
           </li>
         ))}
       </ul>
