@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import ConstructionList from './ConstructionList';
 import Box from './Floorplan';
 import "./index.css";
-import "./ConstructionList.css";
 
 const ConstructionTest = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,8 +26,10 @@ const ConstructionTest = () => {
           <option value="Virginia">VA</option>
         </select>
       </div>
-      <label htmlFor="search">Search Item:</label>
-      <input id="search" value={searchTerm} onChange={handleSearchTermChange} />
+      <div id="searchBar">
+        <label htmlFor="search">Search Item:</label>
+        <input id="search" value={searchTerm} onChange={handleSearchTermChange} />
+      </div>
       <ConstructionList searchTerm={searchTerm} location={location} />
       <Box />
     </div>
