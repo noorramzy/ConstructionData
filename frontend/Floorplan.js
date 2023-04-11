@@ -1,7 +1,9 @@
 import React from "react"
+import Draggable from "react-draggable"
 
 export default function Box() {
     return (
+        
         <div
         style={{
             backgroundColor: "black",
@@ -15,7 +17,7 @@ export default function Box() {
             left: 0,
         }}
         >
-            <div
+            <Draggable><div
                 style={{
                 backgroundColor: "red",
                 borderRadius: 4,
@@ -30,8 +32,8 @@ export default function Box() {
             }}
             >
             counter
-            </div>
-            <div
+            </div></Draggable>  
+            <Draggable><div
                 style={{
                 backgroundColor: "blue",
                 borderRadius: 4,
@@ -46,8 +48,8 @@ export default function Box() {
             }}
             >
             sink
-            </div>
-            <div
+            </div></Draggable>
+            <Draggable><div
                 style={{
                 backgroundColor: "pink",
                 borderRadius: 4,
@@ -62,8 +64,8 @@ export default function Box() {
             }}
             >
             stove
-            </div>
-            <div
+            </div></Draggable>
+            <Draggable><div
                 style={{
                 backgroundColor: "silver",
                 borderRadius: 4,
@@ -78,8 +80,8 @@ export default function Box() {
             }}
             >
             fridge
-            </div>
-            <div
+            </div></Draggable>
+            <Draggable><div
                 style={{
                 backgroundColor: "yellow",
                 borderRadius: 4,
@@ -94,7 +96,7 @@ export default function Box() {
             }}
             >
             island
-            </div>
+            </div></Draggable>
             floor
         </div>
     )
