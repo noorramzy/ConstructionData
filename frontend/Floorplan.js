@@ -1,32 +1,29 @@
 import React, { useState } from "react";
 import Draggable from "react-draggable";
 
-export const Item = (props) => {
+const Item = ({ snapToGrid, color, height, width, itemName }) => {
   return (
-    <Draggable
-      grid={props.snapToGrid ? [15, 15] : null}
-      bounds="parent" // add this line
-    >
+    <Draggable grid={snapToGrid ? [15, 15] : null} bounds="parent">
       <div
         style={{
-          backgroundColor: props.color,
+          backgroundColor: color,
           borderRadius: 4,
           color: "#eee",
-          minHeight: parseInt(props.height),
+          height: parseInt(height),
+          width: parseInt(width),
           padding: 12,
-          width: parseInt(props.width),
           position: "absolute",
           top: 0,
           left: 0,
         }}
       >
-        {props.itemName}
+        {itemName}
       </div>
     </Draggable>
   );
 };
 
-export default function Box() {
+const Box = () => {
   const [snapToGrid, setSnapToGrid] = useState(true);
 
   const handleSnapToGridToggle = () => {
@@ -34,35 +31,35 @@ export default function Box() {
   };
 
   return (
-    <div>
-      <button onClick={handleSnapToGridToggle}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <button onClick={handleSnapToGridToggle} >
         {snapToGrid ? "Disable" : "Enable"} Snap to Grid
       </button>
       <div
         className="outerBox"
         style={{
-          backgroundColor: "black",
+          backgroundColor: "#004970",
           borderRadius: 4,
           color: "#eee",
           minHeight: 350,
-        //   padding: 12,
-          width: 500,
-          position: "absolute",
-          left: 0,
+          padding: 12,
+          width: "100%",
+          position: "relative",
+          margin: "auto",
         }}
       >
         <Item
           color="red"
           height="50"
           width="90"
-          itemName="test"
+          itemName="Test"
           snapToGrid={snapToGrid}
         />
         <Item
           color="blue"
           height="80"
           width="80"
-          itemName="sink"
+          itemName="Sink"
           snapToGrid={snapToGrid}
         />
         <Item
@@ -87,8 +84,22 @@ export default function Box() {
           snapToGrid={snapToGrid}
         />
 
-        floor
+        <div
+          style={{
+            backgroundColor: "#eee",
+            height: 20,
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            textAlign: "center",
+          }}
+        >
+          Floor
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default Box;
