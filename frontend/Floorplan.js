@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Draggable from "react-draggable";
 
 export const Item = (props) => {
-  const [grid, setGrid] = useState([10, 10]);
-
   return (
-    <Draggable grid={grid}>
+    <Draggable
+      grid={props.snapToGrid ? [15, 15] : null}
+      bounds="parent" // add this line
+    >
       <div
         style={{
           backgroundColor: props.color,
@@ -26,14 +27,17 @@ export const Item = (props) => {
 };
 
 export default function Box() {
-  const [showGrid, setShowGrid] = useState(false);
+  const [snapToGrid, setSnapToGrid] = useState(true);
+
+  const handleSnapToGridToggle = () => {
+    setSnapToGrid(!snapToGrid);
+  };
 
   return (
-    <div
-      style={{
-        position: "relative",
-      }}
-    >
+    <div>
+      <button onClick={handleSnapToGridToggle}>
+        {snapToGrid ? "Disable" : "Enable"} Snap to Grid
+      </button>
       <div
         className="outerBox"
         style={{
@@ -41,26 +45,49 @@ export default function Box() {
           borderRadius: 4,
           color: "#eee",
           minHeight: 350,
-          padding: 12,
+        //   padding: 12,
           width: 500,
           position: "absolute",
-          top: 50,
           left: 0,
         }}
       >
-        <Item color="red" height="50" width="90" itemName="test" />
-        <Item color="blue" height="80" width="80" itemName="sink" />
-        <Item color="pink" height="80" width="125" itemName="Stove" />
-        <Item color="silver" height="150" width="80" itemName="Fridge" />
-        <Item color="yellow" height="100" width="275" itemName="Island" />
+        <Item
+          color="red"
+          height="50"
+          width="90"
+          itemName="test"
+          snapToGrid={snapToGrid}
+        />
+        <Item
+          color="blue"
+          height="80"
+          width="80"
+          itemName="sink"
+          snapToGrid={snapToGrid}
+        />
+        <Item
+          color="pink"
+          height="80"
+          width="125"
+          itemName="Stove"
+          snapToGrid={snapToGrid}
+        />
+        <Item
+          color="silver"
+          height="150"
+          width="80"
+          itemName="Fridge"
+          snapToGrid={snapToGrid}
+        />
+        <Item
+          color="yellow"
+          height="100"
+          width="275"
+          itemName="Island"
+          snapToGrid={snapToGrid}
+        />
 
         floor
-      </div>
-
-      <div style={{ position: "absolute", top: 10, left: 10 }}>
-        <button onClick={() => setShowGrid(!showGrid)}>
-          Toggle snap to grid
-        </button>
       </div>
     </div>
   );

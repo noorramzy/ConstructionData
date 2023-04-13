@@ -21,7 +21,6 @@ const ConstructionTest = () => {
   return (
     <div>
       <Homepage />
-      <Box />
     </div>
   );
 }
