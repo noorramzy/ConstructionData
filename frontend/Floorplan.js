@@ -28,13 +28,12 @@ const ItemInfo = ({ height, width, onSizeChange, onSubmit }) => {
   const [newHeight, setNewHeight] = useState(height);
   const [newWidth, setNewWidth] = useState(width);
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
     onSizeChange(newHeight, newWidth);
-    onSubmit();
-  };
-  
+    onSubmit(newHeight, newWidth);
+    };
+
   return (
     <div style={{ backgroundColor: "#fff", padding: 8 }}>
       <form onSubmit={handleSubmit}>
@@ -48,11 +47,12 @@ const ItemInfo = ({ height, width, onSizeChange, onSubmit }) => {
           <input type="text" value={newWidth} onChange={(event) => setNewWidth(event.target.value)} />
         </label>
         <br />
-        <button type="submit" onClick={handleSubmit}>Save</button>
+        <button type="submit">Save</button>
       </form>
     </div>
   );
 };
+
 
 const Box = () => {
   const [snapToGrid, setSnapToGrid] = useState(true);
@@ -67,7 +67,13 @@ const Box = () => {
   };
 
   const handleSizeChange = (newHeight, newWidth) => {
-    setSelectedItem({ ...selectedItem, height: newHeight, width: newWidth });
+    setSelectedItem((prevSelectedItem) => {
+      return {
+        ...prevSelectedItem,
+        height: newHeight,
+        width: newWidth,
+      };
+    });
   };
   
   return (

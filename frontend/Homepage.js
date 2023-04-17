@@ -8,6 +8,7 @@ import "./index.css";
 export default function Homepage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [location, setLocation] = useState('DC');
+  const [roomType, setRoomType] = useState('');
 
   const handleSearchTermChange = ({ target: { value } }) => {
     setSearchTerm(value);
@@ -17,19 +18,11 @@ export default function Homepage() {
     setLocation(value);
   }
 
+  const handleRoomTypeChange = ({ target: {value}}) => {
+    setRoomType(value)
+  }
   return (
     <div>
-      {/* <div className="bar">
-        <div>
-          <NavLink>Test 1</NavLink>
-          <NavLink>Test 2</NavLink>
-          <NavLink>Test 3</NavLink>
-        </div>
-        <Routes>
-          <Route path="/" element={<ConstructionTest></ConstructionTest>}></Route>
-        </Routes>
-      </div>  */}
-
       <div className="dropdown">
         <label htmlFor="location">Location:</label>
         <select id="location" value={location} onChange={handleLocationChange}>
@@ -38,12 +31,19 @@ export default function Homepage() {
           <option value="Virginia">VA</option>
         </select>
       </div>
+      <div className="dropdown">
+        <label htmlFor="roomType">Room Type:</label>
+        <select id="roomType" value={roomType} onChange={handleRoomTypeChange}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </div>
       <div id="searchBar">
         <label htmlFor="search">Search Item:</label>
         <input id="search" value={searchTerm} onChange={handleSearchTermChange} />
       </div>
       <ConstructionList searchTerm={searchTerm} location={location} />
-      <Box />
     </div>
   );
 }
