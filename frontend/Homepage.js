@@ -44,6 +44,7 @@ export default function Homepage() {
         <input id="search" value={searchTerm} onChange={handleSearchTermChange} />
       </div>
       <ConstructionList searchTerm={searchTerm} location={location} />
+      <Box></Box>
     </div>
   );
 }
