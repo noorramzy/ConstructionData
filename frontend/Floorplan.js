@@ -97,9 +97,7 @@ const Box = () => {
         >
           Floor
         </div>
-      </div>
-    </div>
-  );
-};
+    )
+    }
 
 export default Box;
