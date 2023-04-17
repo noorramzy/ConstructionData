@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Draggable from "react-draggable";
 
-const Item = ({ snapToGrid, color, height, width, itemName }) => {
+const Item = ({ snapToGrid, color, height, width, itemName, onClick }) => {
   return (
     <Draggable grid={snapToGrid ? [15, 15] : null} bounds="parent">
       <div
@@ -16,89 +16,114 @@ const Item = ({ snapToGrid, color, height, width, itemName }) => {
           top: 0,
           left: 0,
         }}
+        onClick={onClick}
       >
         {itemName}
       </div>
     </Draggable>
   );
 };
+
+const ItemInfo = ({ height, width }) => {
+  return (
+    <div style={{ backgroundColor: "#fff", padding: 8 }}>
+      <p>Height: {height}</p>
+      <p>Width: {width}</p>
+    </div>
+  );
+};
+
 const Box = () => {
-    const [snapToGrid, setSnapToGrid] = useState(true);
-  
-    const handleSnapToGridToggle = () => {
-      setSnapToGrid(!snapToGrid);
-    };
-  
-    return (
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <button onClick={handleSnapToGridToggle} >
-          {snapToGrid ? "Disable" : "Enable"} Snap to Grid
-        </button>
+  const [snapToGrid, setSnapToGrid] = useState(true);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleSnapToGridToggle = () => {
+    setSnapToGrid(!snapToGrid);
+  };
+
+  const handleItemClick = (height, width) => {
+    setSelectedItem({ height, width });
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <button onClick={handleSnapToGridToggle}>
+        {snapToGrid ? "Disable" : "Enable"} Snap to Grid
+      </button>
+      <div
+        className="outerBox"
+        style={{
+          backgroundColor: "#004970",
+          borderRadius: 4,
+          color: "#eee",
+          minHeight: 350,
+          padding: 12,
+          width: "100%",
+          position: "relative",
+          margin: "auto",
+        }}
+      >
+        <Item
+          color="red"
+          height="50"
+          width="90"
+          itemName="Test"
+          snapToGrid={snapToGrid}
+          onClick={() => handleItemClick(50, 90)}
+        />
+        <Item
+          color="blue"
+          height="80"
+          width="80"
+          itemName="Sink"
+          snapToGrid={snapToGrid}
+          onClick={() => handleItemClick(80, 80)}
+        />
+        <Item
+          color="pink"
+          height="80"
+          width="125"
+          itemName="Stove"
+          snapToGrid={snapToGrid}
+          onClick={() => handleItemClick(80, 125)}
+        />
+        <Item
+          color="silver"
+          height="150"
+          width="80"
+          itemName="Fridge"
+          snapToGrid={snapToGrid}
+          onClick={() => handleItemClick(150, 80)}
+        />
+        <Item
+          color="yellow"
+          height="100"
+          width="275"
+          itemName="Island"
+          snapToGrid={snapToGrid}
+          onClick={() => handleItemClick(100, 275)}
+        />
+
         <div
-          className="outerBox"
           style={{
-            backgroundColor: "#004970",
-            borderRadius: 4,
-            color: "#eee",
-            minHeight: 350,
-            padding: 12,
-            width: "100%",
-            position: "relative",
-            margin: "auto",
+            backgroundColor: "#eee",
+            height: 20,
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            textAlign: "center",
           }}
         >
-          <Item
-            color="red"
-            height="50"
-            width="90"
-            itemName="Test"
-            snapToGrid={snapToGrid}
-          />
-          <Item
-            color="blue"
-            height="80"
-            width="80"
-            itemName="Sink"
-            snapToGrid={snapToGrid}
-          />
-          <Item
-            color="pink"
-            height="80"
-            width="125"
-            itemName="Stove"
-            snapToGrid={snapToGrid}
-          />
-          <Item
-            color="silver"
-            height="150"
-            width="80"
-            itemName="Fridge"
-            snapToGrid={snapToGrid}
-          />
-          <Item
-            color="yellow"
-            height="100"
-            width="275"
-            itemName="Island"
-            snapToGrid={snapToGrid}
-          />
-  
-          <div
-            style={{
-              backgroundColor: "#eee",
-              height: 20,
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              textAlign: "center",
-            }}
-          >
-            Floor
-          </div>
+          Floor
         </div>
       </div>
-    );
-  };
+      {selectedItem && (
+        <ItemInfo height={selectedItem.height} width={selectedItem.width} />
+      )}
+    </div>
+  );
+};
+
   
 export default Box;

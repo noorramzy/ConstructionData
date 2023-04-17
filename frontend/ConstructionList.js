@@ -13,7 +13,6 @@ export default function ConstructionList(props) {
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
   );
-
   return (
     <div className="construction-list-container">
       <h2 className="construction-list-header">Construction Materials</h2>
@@ -22,9 +21,10 @@ export default function ConstructionList(props) {
           <li key={record.id} className="construction-list-item">
             <span className="construction-list-item-material">
               {record.getCellValueAsString('Material')}:
-            </span>
+            </span> 
             <span className="construction-list-item-price">
               ${Number(record.getCellValueAsString('Price')).toLocaleString()}
+              <button>test</button>
             </span>
 
           </li>
