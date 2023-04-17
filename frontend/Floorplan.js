@@ -24,11 +24,32 @@ const Item = ({ snapToGrid, color, height, width, itemName, onClick }) => {
   );
 };
 
-const ItemInfo = ({ height, width }) => {
+const ItemInfo = ({ height, width, onSizeChange, onSubmit }) => {
+  const [newHeight, setNewHeight] = useState(height);
+  const [newWidth, setNewWidth] = useState(width);
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSizeChange(newHeight, newWidth);
+    onSubmit();
+  };
+  
   return (
     <div style={{ backgroundColor: "#fff", padding: 8 }}>
-      <p>Height: {height}</p>
-      <p>Width: {width}</p>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Height:
+          <input type="text" value={newHeight} onChange={(event) => setNewHeight(event.target.value)} />
+        </label>
+        <br />
+        <label>
+          Width:
+          <input type="text" value={newWidth} onChange={(event) => setNewWidth(event.target.value)} />
+        </label>
+        <br />
+        <button type="submit" onClick={handleSubmit}>Save</button>
+      </form>
     </div>
   );
 };
@@ -45,6 +66,10 @@ const Box = () => {
     setSelectedItem({ height, width });
   };
 
+  const handleSizeChange = (newHeight, newWidth) => {
+    setSelectedItem({ ...selectedItem, height: newHeight, width: newWidth });
+  };
+  
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <button onClick={handleSnapToGridToggle}>
@@ -119,7 +144,13 @@ const Box = () => {
         </div>
       </div>
       {selectedItem && (
-        <ItemInfo height={selectedItem.height} width={selectedItem.width} />
+        <ItemInfo
+        height={selectedItem.height}
+        width={selectedItem.width}
+        onSizeChange={handleSizeChange}
+        onSubmit={() => setSelectedItem(null)}
+      />
+      
       )}
     </div>
   );
