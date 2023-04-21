@@ -12,6 +12,9 @@ function Navbar() {
       <NavLink to="/floorplan" className="navbar-link">
         Floorplan
       </NavLink>
+      <NavLink to="/ideas" className="navbar-link">
+        Ideas
+      </NavLink>
       </div>
     </nav>
   );
