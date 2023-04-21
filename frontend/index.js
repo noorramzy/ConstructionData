@@ -8,14 +8,12 @@ import Box from './Floorplan';
 import { HashRouter } from 'react-router-dom'
 import Homepage from './Homepage';
 import './ConstructionTest.css';
+import Navbar from './Navbar';
 
 const ConstructionTest = () => {
   return (
     <HashRouter>
-      <nav className="navbar">
-        <NavLink to="/" className="navlink" activeClassName="active">Home</NavLink>
-        <NavLink to="/floorplan" className="navlink" activeClassName="active">Floorplan</NavLink>
-      </nav>
+      <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/floorplan" element={<Box />} />
