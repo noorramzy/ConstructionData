@@ -8,7 +8,7 @@ import "./index.css";
 export default function Homepage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [location, setLocation] = useState('DC');
-  const [roomType, setRoomType] = useState('');
+  const [roomType, setRoomType] = useState('Bedroom');
 
   const handleSearchTermChange = ({ target: { value } }) => {
     setSearchTerm(value);
@@ -34,16 +34,18 @@ export default function Homepage() {
       <div className="dropdown">
         <label htmlFor="roomType">Room Type:</label>
         <select id="roomType" value={roomType} onChange={handleRoomTypeChange}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <option value="Bathroom">Bathroom</option>
+          <option value="Living">Living Room</option>
+          <option value="Kitchen">Kitchen</option>
+          <option value="Bedroom">Bedroom</option>
+          <option value="Dining">Dining Room</option>
         </select>
       </div>
       <div id="searchBar">
         <label htmlFor="search">Search Item:</label>
         <input id="search" value={searchTerm} onChange={handleSearchTermChange} />
       </div>
-      <ConstructionList searchTerm={searchTerm} location={location} />
+      <ConstructionList searchTerm={searchTerm} location={location} roomType = {roomType} />
       <Box></Box>
     </div>
   );
