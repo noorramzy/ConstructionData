@@ -8,7 +8,7 @@ const Item = ({ snapToGrid, color, height, width, itemName, onClick }) => {
         style={{
           backgroundColor: color,
           borderRadius: 4,
-          color: "#eee",
+          color: "black",
           height: parseInt(height),
           width: parseInt(width),
           padding: 12,
@@ -55,29 +55,83 @@ const ItemInfo = ({ height, width, onSizeChange, onSubmit }) => {
 
 
 const Box = () => {
-  const [snapToGrid, setSnapToGrid] = useState(true);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedMaterial, setSelectedMaterial] = useState("yellow");
+  const [itemList, setItemList] = useState([
+    {
+      color: "red",
+      height: 150,
+      width: 80,
+      name: "Living"
+    },
 
+    {
+      color: "red",
+      height: 130,
+      width: 90,
+      name: "Dining"
+    },
+    {
+      color: "blue",
+      height: 70,
+      width: 60,
+      name: "Bath"
+    },
+    {
+      color: "blue",
+      height: 60,
+      width: 60,
+      name: "Bath 2"
+    },
+    {
+      color: "red",
+      height: 100,
+      width: 130,
+      name: "Bed"
+    },
+    {
+      color: "red",
+      height: 140,
+      width: 120,
+      name: "Master Bed"
+    },
+    {
+      color: "red",
+      height: 80,
+      width: 150,
+      name: "Kitchen"
+    }
+
+  ])
+
+  const [snapToGrid, setSnapToGrid] = useState(true);  
+
+  
   const handleSnapToGridToggle = () => {
     setSnapToGrid(!snapToGrid);
   };
 
-  const handleItemClick = (height, width) => {
-    setSelectedItem({ height, width });
-  };
+  function handleMaterialChange (optionChangeEvent){
+    setSelectedMaterial(optionChangeEvent.target.value)
+  }
 
-  const handleSizeChange = (newHeight, newWidth) => {
-    setSelectedItem((prevSelectedItem) => {
-      return {
-        ...prevSelectedItem,
-        height: newHeight,
-        width: newWidth,
-      };
-    });
-  };
+  function setMaterial (itemIndex){
+    itemList[itemIndex].color = selectedMaterial;
+    setItemList([...itemList]);
+  }
   
   return (
+    
     <div style={{ display: "flex", flexDirection: "column" }}>
+      <div className="dropdown">  
+        <label htmlFor="material">Material</label>
+        <select id="roomMaterial" onChange={handleMaterialChange}>
+          <option value="yellow">Wood</option>
+          <option value="green">Tile</option>
+          <option value="blue">Granite</option>
+          <option value="pink">Carpet</option>
+        </select>
+      </div>
+
       <button onClick={handleSnapToGridToggle}>
         {snapToGrid ? "Disable" : "Enable"} Snap to Grid
       </button>
@@ -94,46 +148,19 @@ const Box = () => {
           margin: "auto",
         }}
       >
-        <Item
-          color="red"
-          height="50"
-          width="90"
-          itemName="Test"
-          snapToGrid={snapToGrid}
-          onClick={() => handleItemClick(50, 90)}
-        />
-        <Item
-          color="blue"
-          height="80"
-          width="80"
-          itemName="Sink"
-          snapToGrid={snapToGrid}
-          onClick={() => handleItemClick(80, 80)}
-        />
-        <Item
-          color="pink"
-          height="80"
-          width="125"
-          itemName="Stove"
-          snapToGrid={snapToGrid}
-          onClick={() => handleItemClick(80, 125)}
-        />
-        <Item
-          color="silver"
-          height="150"
-          width="80"
-          itemName="Fridge"
-          snapToGrid={snapToGrid}
-          onClick={() => handleItemClick(150, 80)}
-        />
-        <Item
-          color="yellow"
-          height="100"
-          width="275"
-          itemName="Island"
-          snapToGrid={snapToGrid}
-          onClick={() => handleItemClick(100, 275)}
-        />
+
+        {itemList.map(
+          (item,index) => ( <Item
+            color={item.color}
+            height= {item.height}
+            width = {item.width}
+            itemName = {item.name}
+            snapToGrid={snapToGrid}
+            onClick={() => setMaterial(index)}
+          />)
+        )}
+
+        
 
         <div
           style={{
@@ -149,15 +176,7 @@ const Box = () => {
           Floor
         </div>
       </div>
-      {selectedItem && (
-        <ItemInfo
-        height={selectedItem.height}
-        width={selectedItem.width}
-        onSizeChange={handleSizeChange}
-        onSubmit={() => setSelectedItem(null)}
-      />
       
-      )}
     </div>
   );
 };

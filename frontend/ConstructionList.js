@@ -43,12 +43,14 @@ export default function ConstructionList(props) {
     setSelectedItems([]);
   };
 
+  
   const totalPrice = selectedItems.reduce((acc, item) => {
     return acc + parseFloat(item.price) * priceCoeff;
   }, 0);
 
   return (
     <div className="construction-list-container">
+
       <h2 className="construction-list-header">Construction Materials</h2>
       <ul className="construction-list">
         {filteredRecords.map((record) => (
